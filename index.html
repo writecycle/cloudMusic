@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>网易云测试</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+var indexMurl_pc=[
+	"http://hbimg.huabanimg.com/786a995cf2e012acdcc68d64da5c28a8d0c995d979869-gjf8Mi",
+	"http://hbimg.huabanimg.com/3d95e664ac1caa740f11a63e8066c565822da26283c18-Z3szrQ",
+	"http://hbimg.huabanimg.com/7e1f84e8162a0a0b42efd31860caec063bcd47df5fa3a-8WVOZK",
+	"http://hbimg.huabanimg.com/41e56037c1b376b11bb53328f564376d2aedd3e92a433c-SCIPcB",
+	"http://hbimg.huabanimg.com/238ef2d22420909c3f44ac51f7e7eb327fd704c2b6bb9-8p01Ed"
+]
+var indexMurl_mo=[
+	"http://hbimg.huabanimg.com/d28df18f4c8407d9536fa4379e783e00496b96373be14-hM6VnA",
+	"http://hbimg.huabanimg.com/2ddd516536a6cedd330d8fb8422e6ae073fc2e421413c4-pnJXsz",
+	"http://hbimg.huabanimg.com/9554e5ec91105c7d8a6af2c0df79cfec1430f0114a801-l2zjh9",
+	"http://hbimg.huabanimg.com/39871e1b5afd0e2fbfa8d2db489188a3a180581f23a59-YKzx5L",
+	"http://hbimg.huabanimg.com/b5ce010e8c48cb98adf8711635d7ca195bb469531262e-Hugi2n",
+	"http://hbimg.huabanimg.com/f92cb6f3987e377b6974e88ac324bc144973c43e8a1e0-Aul9RY_fw658"
+]
+var pc_css=
+`<meta charset="UTF-8">
+<style>
+html,body{width:100vw;min-height:100vh;margin:0;padding:0;font-size: 1.5vh;}
+*{color:#646464}a{color:#42b983}
+#mimg{position:fixed;top:0;right:0;bottom:0;left:0;margin:auto;width:100vw;z-index:-1;opacity:.1}
+#indexM{position:absolute;width:80vw;height:40vw;top:0;left:0;right:0;bottom:0;margin:auto;background-size:100%;background-repeat:no-repeat;background-image:url("`+indexMurl_pc[rand(0,4)]+`");overflow:hidden}
+#mSearch,
+#mList,
+#mBaidu,
+#mBili,
+#mFindme{position: absolute;text-align:center;line-height:8vw;width: 8vw;height:8vw;background-color:rgba(0,0,0,.2);color:#fff;font-size:1.5vw;cursor:pointer;border:rgba(255,255,255,.5) 1px solid;margin-left:-1px;box-sizing:border-box;-moz-box-sizing:border-box;}
+#mSearch:hover,
+#mList:hover,
+#mBaidu:hover,
+#mBili:hover,
+#mFindme:hover{background-color:rgba(255,255,255,.2);color:deeppink}
+#search{position: relative;top:40vh;margin:0 auto;width:24vw;height:3vh;border: 1px solid #3385ff;border-radius: 1.5vh;overflow: hidden;transition: .3s}
+#search>input{background-color:rgba(0,0,0,0);outline: none;border: 0;width:17vw;height:3vh;padding:0 0 0.2vh 1vw;line-height: 3px;float:left;}
+#search>button{float: right;width:6vw;height:3vh;border:0px;color:#3385ff;background:none;outline:none;letter-spacing:.8vw;padding-left:1vw;font-size:1.5vh;border-left:1px #3385ff solid;cursor:pointer}
+#search>button:hover{background:#3385ff;color:#fff}
+#list{position: relative;top:100vh;margin:0 auto;opacity: 0;transition: .5s}
+#songList{height: 3vh;width:40vw;margin:0 auto;}
+#songList>#songName{display: block;width:24vw;margin-right:1vw;height:3vh;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;float: left;cursor:pointer}
+#songList>#songName:hover{color:red}
+#songList>#authorName{display: block;width:10vw;height:3vh;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;float: left;cursor:default;color:#f36b19}
+#songList>a{display: block;float: right;text-decoration:none;width:5vw}
+#songList>a:hover{color:deeppink}
+#banner{width:24vw;height:24vw;border-radius:2%;margin:0 auto;background-size:100% 100%;background-position:0 0;}
+#audio{width:24vw;height:0;margin:0 auto;display:block;margin-top:0;opacity:0.8}
+#gdType{position:absolute;top:0;right:0;bottom:0;left:0;width:80vw;height:80vh;margin:auto}
+#gdType>div{height:8vh;text-align:center;line-height:8vh;font-size:5vw}
+#gdType>div>span{cursor:pointer}
+#gdList{width:80vw;margin:0 auto;padding-top:6vh}
+#gdName{display:block;width:54vw;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;float: left;margin-bottom:.5em;cursor:pointer}
+#gdTime{display:block;width:24vw;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;float: right;margin-bottom:.5em;color:#f36b19;cursor:default}
+#gdSongs{margin-top:8vh;width:100vw}
+#palyName{width: 100%;color: #ec7a04;text-align: center;height: 8vh;line-height: 8vh;font-size: 3vh}
+#inputImg{position:absolute;width:24vw;height:7vh;top:29vh;right:0;left:0;margin:auto;background-position:center -20vh;background-size:100%;background-image:url("http://hbimg.huabanimg.com/a451e3f45e77061da9761068e7fb7c13fe042e2c8b46b-NslCZG");cursor:pointer;transition: .3s}
+#inputImg:hover{border:1px solid deeppink;box-sizing:border-box;-moz-box-sizing:border-box;background-size:120%;background-position:center -24vh}
+#goToPage{position:fixed;right:2vw;top:47vh;width:6vh;height:6vh;transition:0.5s;background-size:100%;background-image:url("http://hbimg.huabanimg.com/eadb8a76234e7fa431f0c4e3f1baae3c6f97a522ff2-ii7zcC");transform:rotate(90deg);opacity: .3;cursor:pointer;transition:0.3s}
+#goToPage:hover{transform:rotate(-270deg)}
+</style>
+<title>网易云测试</title>`
+var mo_css=
+`<meta charset="UTF-8">
+<style>
+html,body{width:100vw;min-height:100vh;margin:0;padding:0;font-size: 4vw;}
+*{color:#646464}a{color:#42b983}
+#mimg{position:fixed;top:0;right:0;bottom:0;left:0;margin:auto;width:100vw;z-index:-1;opacity:.1}
+#indexM{position:absolute;width:80vw;height:140vw;top:0;left:0;right:0;bottom:0;margin:auto;background-size:auto 100%;background-repeat:no-repeat;background-image:url(`+indexMurl_mo[rand(0,5)]+`)}
+#mSearch,
+#mList,
+#mBaidu,
+#mBili,
+#mFindme{position: absolute;text-align:center;line-height:20vw;width:20vw;height:20vw;background-color:rgba(0,0,0,.2);color:#fff;font-size:4.5vw;border:rgba(255,255,255,.5) 1px solid;box-sizing:border-box;-moz-box-sizing:border-box;}
+#search{position: relative;top:40vh;margin:0 auto;width:70vw;height:5vh;border: 1px solid #888;border-radius: 2.5vh;overflow: hidden;transition: .3s}
+#search>input{outline: none;border: 0;width:38vw;height:5vh;padding:0 0 0.2vh 4vw;line-height: 3px;font-size: 4vw;float:left;background-color:rgba(0,0,0,0)}
+#search>button{float: right;width:20vw;height:5vh;border:0px;color:#fff;background:#3385ff;outline:none;font-size: 4vw;}
+#list{position: relative;top:100vh;margin:0 auto;transition: .5s}
+#songList{height:5vh;width: 80vw;margin: 0 auto;}
+#songList>#songName{display: block;width:42vw;height:3vh;margin-right:2vw;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;float: left;margin-bottom:.5em}
+#songList>#authorName{display: block;width:18vw;height:3vh;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;float: left;margin-bottom:.5em;color:#f36b19}
+#songList>a{display: block;float: right;text-decoration:none;}
+#banner{width:70vw;height:70vw;border-radius:1%;margin:0 auto;background-size:100% 100%;background-position:0 0;}
+#audio{width:70vw;height:0;margin:0 auto;display:block;margin-top:0;opacity:0.8}
+#goToPage{position:fixed;right:2vw;bottom:5vw;width:10vw;height:10vw;transition:0.5s;background-size:100%;background-image:url("http://hbimg.huabanimg.com/eadb8a76234e7fa431f0c4e3f1baae3c6f97a522ff2-ii7zcC");transform:rotate(90deg);opacity: .3}
+#inputImg{position:absolute;width:70vw;height:16vw;top:29vh;right:0;left:0;margin:auto;background-position:0 -13vh;background-size:100%;background-image:url("http://hbimg.huabanimg.com/a451e3f45e77061da9761068e7fb7c13fe042e2c8b46b-NslCZG");transition: .3s}
+#gdType{position:absolute;top:0;right:0;bottom:0;left:0;width:80vw;height:80vh;margin:auto}
+#gdType>div{height:8vh;text-align:center;line-height:8vh;font-size:5vw}
+#gdList{width:80vw;margin:0 auto;padding-top:6vh}
+#gdName{display:block;width:54vw;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;float: left;margin-bottom:.5em;}
+#gdTime{display:block;width:24vw;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;float: right;margin-bottom:.5em;color:#f36b19}
+#gdSongs{margin-top:8vh;width:100vw}
+#palyName{width: 100%;color: #ec7a04;text-align: center;height: 8vh;line-height: 8vh;font-size: 3vh}
+</style>
+<title>网易云测试</title>`
+var dom_index=`<image id="mimg" src="http://hbimg.huabanimg.com/7223f1f58b8f6d7f508b69dd61b1921db6045ebe188a1d-7wKqKQ"><div id="content"></div>`
+var urlHost=`http://120.79.36.48`
+var keywords=[],el="",bool = false,x=0,y=0,json_index=""
+var json=[{
+		"position":[
+			{"id":"mSearch","x":rand(1,6),"y":rand(1,32),"vx":rand(1,3)/50,"vy":rand(1,3)/50},
+			{"id":"mList","x":rand(15,21),"y":rand(1,32),"vx":rand(1,3)/50,"vy":rand(1,3)/50},
+			{"id":"mBaidu","x":rand(29,35),"y":rand(1,32),"vx":rand(1,3)/50,"vy":rand(1,3)/50},
+			{"id":"mBili","x":rand(43,49),"y":rand(1,32),"vx":rand(1,3)/50,"vy":rand(1,3)/50},
+			{"id":"mFindme","x":rand(57,63),"y":rand(1,32),"vx":rand(1,3)/50,"vy":rand(1,3)/50}
+		],
+		"start":[
+			{"id":"mSearch","x":0,"y":0,},
+			{"id":"mList","x":8,"y":0,},
+			{"id":"mBaidu","x":16,"y":0,},
+			{"id":"mBili","x":24,"y":0,},
+			{"id":"mFindme","x":32,"y":0}
+		],
+		"left":72,
+		"top":32,
+		"size":8
+	},{
+		"position":[
+			{"id":"mSearch","x":rand(1,59),"y":rand(1,8),"vx":rand(1,3)/50,"vy":rand(1,3)/50},
+			{"id":"mList","x":rand(1,59),"y":rand(29,37),"vx":rand(1,3)/50,"vy":rand(1,3)/50},
+			{"id":"mBaidu","x":rand(1,59),"y":rand(57,65),"vx":rand(1,3)/50,"vy":rand(1,3)/50},
+			{"id":"mBili","x":rand(1,59),"y":rand(85,93),"vx":rand(1,3)/50,"vy":rand(1,3)/50},
+			{"id":"mFindme","x":rand(1,59),"y":rand(112,120),"vx":rand(1,3)/50,"vy":rand(1,3)/50}
+		],
+		"start":[
+			{"id":"mSearch","x":0,"y":0,},
+			{"id":"mList","x":0,"y":20,},
+			{"id":"mBaidu","x":0,"y":40,},
+			{"id":"mBili","x":0,"y":60,},
+			{"id":"mFindme","x":0,"y":80}
+		],
+		"left":60,
+		"top":120,
+		"size":20
+	}]
+
+
+window.onload=function(){
+	if(window.screen.availWidth>600){
+		ceateIndex(pc_css,dom_index)
+		json_index=0
+	}else{
+		ceateIndex(mo_css,dom_index)
+		json_index=1
+	}
+}
+
+function ceateIndex(css,dom){
+	document.write(css+dom)
+	createHome()
+	console.log("_(ÒωÓ๑ゝ∠)_qq1494915566")
+}
+
+function createHome(){
+	document.getElementById("content").innerHTML=`<div id="indexM"><div id="mSearch" onclick="createSearch()">搜歌</div><div id="mList" onclick="createHGD()">热门</div><div id="mBaidu" onclick="mBaidu()">百度</div><div id="mBili" onclick="mBili()">b站</div><div id="mFindme" onclick="mFindme()">我的</div></div>`
+	var myVar = setInterval(()=>moreXY(json[json_index].position,json[json_index].left,json[json_index].top,json[json_index].size), 20)
+	document.getElementById("indexM").addEventListener("click", ()=>{
+		clearInterval(myVar)
+		move(json[json_index].start)
+	})
+}
+
+function createSearch(){
+	document.getElementById("content").innerHTML='<div id="inputImg" onclick="createHome()"></div><div id="search"><input type="text" onkeydown="keyDown(event)"><button onclick="search()">搜索</button></div><div id="list"></div>'
+}
+
+function createHGD(){
+	var text = ""
+	var url=urlHost+"/playlist/hot"
+	var list=ajGet(url).tags
+	for(i in list){
+		keywords[i]=list[i].name
+		var span=""
+		for(j in list[i].name.toString()){
+			span +='<span style="font-size:'+rand(2,6)+'vh;color:rgb('+rand(0,255)+','+rand(0,255)+','+rand(0,255)+')">'+list[i].name.toString()[j]+'</span>'
+		}
+		text+='<div onclick="searchGD('+i+')">'+span+'</div>'
+	}
+	document.getElementById("content").innerHTML='<div id="goToPage" onclick="goToPage('+0+')"></div><div id="gdType">'+text+'</div>'
+}
+
+function mFindme(){
+	alert("学习交流用")
+}
+function mBaidu(){
+	alert("百度一下，你就知道？")
+	document.getElementById("content").innerHTML='<div id="inputImg" onclick="createHome()"></div><div id="search"><input type="text" onkeydown="keyDown(event,2)"><button onclick="search(2)">百度</button></div><div id="list"></div>'
+}
+function mBili(){
+	alert("嘤~嘤~嘤~")
+	search(3)
+}
+
+function moreXY(xy,left,top,size){
+	for(var i=0;i<=xy.length-2;i++){
+		for(var j=i+1;j<=xy.length-1;j++){
+			move(xy)
+			xy[i].x+=xy[i].vx
+			xy[j].x+=xy[j].vx
+			xy[i].y+=xy[i].vy
+			xy[j].y+=xy[j].vy
+			x=Math.abs(xy[i].x-xy[j].x)
+			y=Math.abs(xy[i].y-xy[j].y)
+			if((xy[i].x<0||xy[i].x>left)&&(xy[i].x*xy[i].vx>0)){xy[i].vx=-xy[i].vx}
+			if((xy[j].x<0||xy[j].x>left)&&(xy[j].x*xy[j].vx>0)){xy[j].vx=-xy[j].vx}
+			if((xy[i].y<0||xy[i].y>top)&&(xy[i].y*xy[i].vy>0)){xy[i].vy=-xy[i].vy}
+			if((xy[j].y<0||xy[j].y>top)&&(xy[j].y*xy[j].vy>0)){xy[j].vy=-xy[j].vy}
+			if(x<=size&&y<=size){
+				if(x>y){
+					if(xy[i].vx*xy[j].vx<0){
+						xy[i].vx=-xy[i].vx
+						xy[j].vx=-xy[j].vx
+						xy[i].x+=xy[i].vx/2
+						xy[j].x+=xy[j].vx/2
+					}else{
+						if((xy[i].vx-xy[j].vx)*xy[i].vx>0){
+							xy[i].vx=-xy[i].vx
+						}else{
+							xy[j].vx=-xy[j].vx
+						}
+					}
+				}else{
+					if(xy[i].vy*xy[j].vy<0){
+						xy[i].vy=-xy[i].vy
+						xy[j].vy=-xy[j].vy
+						xy[i].y+=0.02
+						xy[j].y+=0.02
+					}else{
+						if((xy[i].vy-xy[j].vy)*xy[i].vy>0){
+							xy[i].vy=-xy[i].vy
+						}else{
+							xy[j].vy=-xy[j].vy
+						}
+					}
+				}
+			}
+		}
+	}
+}
+	
+function move(xy){
+	for(i in xy){
+		document.getElementById(xy[i].id).style.left=xy[i].x+"vw"
+		document.getElementById(xy[i].id).style.top=xy[i].y+"vw"
+	}
+}
+
+function searchGD(i){
+	var tag=keywords[i]
+	var text=""
+	var url=urlHost+"/top/playlist?cat="+tag
+	var list=ajGet(url).playlists
+	var gdUrl = urlHost+'/playlist/detail?id='+list[i].id
+	
+	for(i in list){
+		var num=rand(20,25)/10
+		text += '<div id="gd"><span id="gdName" onclick="gdSongs('+list[i].id+')" style="font-size:'+num+'vh;color:rgb('+rand(0,255)+','+rand(0,255)+','+rand(0,255)+')">'+list[i].name+'</span><span id="gdTime" style="font-size:'+num+'vh">'+getTime(list[i].updateTime)+'</span></div>'
+	}
+	document.getElementById("content").innerHTML='<div id="goToPage" onclick="goToPage('+1+')"></div><div id="gdList">'+text+'</div>'
+}
+
+function gdSongs(id){
+	var url=urlHost+"/playlist/detail?id="+id
+	var text = ""
+	var songs = ajGet(url)
+	for(i in songs){
+		el="gdSongs"
+		var songUrl = 'http://music.163.com/song/media/outer/url?id='+songs[i].song_id+'.mp3'
+		text += '<div id="songList"><span id="songName" onclick="paly('+songs[i].song_id+')">'+songs[i].name+'</span><span id="authorName">'+songs[i].author+'</span><a href="'+songUrl+'" download="'+songs[i].name+'.mp3">下载地址</a></div>'
+	}
+	document.getElementById("content").innerHTML='<div id="goToPage" onclick="goToPage('+2+')"></div><div id="gdSongs">'+text+'</div>'
+}
+
+function search(key){
+	if(key==1){
+		var url=urlHost+"/search?keywords="+document.querySelector("input").value
+		var text = ""
+		var songs = ajGet(url).result.songs
+		for(i in songs){
+			el="list"
+			var songUrl = 'http://music.163.com/song/media/outer/url?id='+songs[i].id+'.mp3'
+			text += '<div id="songList"><span id="songName" onclick="paly('+songs[i].id+')">'+songs[i].name+'</span><span id="authorName">'+songs[i].artists[0].name+'</span><a href="'+songUrl+'" download="'+songs[i].name+'.mp3">下载地址</a></div>'
+		}
+		document.getElementById("list").innerHTML=text
+		changeCss()
+	}else if(key==2){
+		window.location.href="https://www.baidu.com/s?wd="+document.querySelector("input").value
+	}else{
+		window.location.href="https://www.bilibili.com/"
+	}
+}
+
+function searchSong(id){
+	var url=urlHost+"/song/detail?ids="+id
+	return ajGet(url).songs[0]
+}
+
+function keyDown(e,key){var ev=window.event||e;if(ev.keyCode==13){search(key)}else if(ev.keyCode==8){clearCss()}}
+
+
+function changeCss(){
+	document.querySelector("#search").style.top="4vh"
+	document.querySelector("#list").style.top="8vh"
+	document.querySelector("#list").style.opacity="1"
+	document.querySelector("#inputImg").style.top="-16vh"
+	bool = true
+}
+
+function clearCss(){
+	document.querySelector("#list").style.top="100vh"
+	document.querySelector("#list").style.opacity="0"
+	// document.querySelector("#home").style.bottom="-10vw"
+	document.querySelector("#inputImg").style.top="12vh"
+	if(bool){
+		setTimeout(()=>{document.getElementById("list").innerHTML=""},500)
+		bool=false
+	}
+}
+
+function ajGet(url){
+	if (window.XMLHttpRequest){ 
+		var xhr=new XMLHttpRequest(); 
+	}else{
+		var xhr=new ActiveXObject("Microsoft.XMLHTTP"); 
+	} 
+	xhr.open('get',url,false)
+	xhr.send()
+	xhr.onreadystatechange = function(data){
+		if (xhr.readyState == 4){
+			console.log('成功')
+		}
+	}
+	return JSON.parse(xhr.response)
+}
+
+function paly(id){
+	var song=searchSong(id)
+	var src=song.al.picUrl
+	var url = 'http://music.163.com/song/media/outer/url?id='+id+'.mp3'
+	document.getElementById(el).innerHTML=""
+	document.getElementById(el).innerHTML='<div id="banner"></div><audio controls="controls" autoplay="autoplay" loop="loop" id="audio" src='+url+'></audio><div id="palyName">'+song.name+'<div>'
+	document.getElementById("banner").style.backgroundImage='url("'+src+'")'
+}
+
+function getTime(time){
+	var newTime = new Date(time)
+	var Time = newTime.getFullYear()+"."+newTime.getMonth()+"."+newTime.getDate()
+	return Time
+}
+
+function rand(min,max){
+	var range=max-min
+	var rand=Math.random()
+	var num=min+Math.round(rand*range)
+	return num
+}
+
+function goToPage(a){
+	switch(a) {
+		case 0:
+			createHome()
+			break
+		case 1:
+			createHGD()
+			break
+		case 2:
+			createHGD()
+			break
+		default:
+	} 
+}
+</script>
