@@ -157,7 +157,7 @@ function ceateIndex(css,dom){
 }
 
 function createHome(){
-	document.getElementById("content").innerHTML=`<div id="indexM"><div id="mSearch" onclick="createSearch()">搜歌</div><div id="mList" onclick="createHGD()">热门</div><div id="mBaidu" onclick="mBaidu()">百度</div><div id="mBili" onclick="mBili()">b站</div><div id="mFindme" onclick="mFindme()">我的</div></div>`
+	document.getElementById("content").innerHTML=`<div id="indexM"><div id="mSearch" onclick="createSearch(1)">搜歌</div><div id="mList" onclick="createHGD()">热门</div><div id="mBaidu" onclick="mBaidu()">百度</div><div id="mBili" onclick="mBili()">b站</div><div id="mFindme" onclick="mFindme()">我的</div></div>`
 	var myVar = setInterval(()=>moreXY(json[json_index].position,json[json_index].left,json[json_index].top,json[json_index].size), 20)
 	document.getElementById("indexM").addEventListener("click", ()=>{
 		clearInterval(myVar)
